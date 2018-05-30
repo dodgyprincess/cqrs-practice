@@ -10,7 +10,7 @@ class SignUpHandler implements CommandHandlerInterface
 {
     public function __invoke(SignUpCommand $command): void
     {
-        $aggregateRoot = $this->userFactory->register($command->uuid, $command->credentials);
+        $aggregateRoot = $this->userFactory->register($command->uuid, $command->credentials, $command->name);
 
         $this->userRepository->store($aggregateRoot);
     }

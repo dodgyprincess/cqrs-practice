@@ -6,6 +6,12 @@
         <div class="column is-half">
             <h2>Hi</h2> {{ app.user.username }}
         </div>
+
+        <div>
+            <form action="/user/say-hello" method="post">
+                <button>Say Hello</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock body %}

@@ -7,6 +7,7 @@ namespace App\Domain\User\Event;
 use App\Domain\User\ValueObject\Auth\Credentials;
 use App\Domain\User\ValueObject\Auth\HashedPassword;
 use App\Domain\User\ValueObject\Email;
+use App\Domain\User\ValueObject\Name;
 use Assert\Assertion;
 use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
@@ -18,13 +19,15 @@ final class UserWasCreated implements Serializable
     {
         Assertion::keyExists($data, 'uuid');
         Assertion::keyExists($data, 'credentials');
+        Assertion::keyExists($data, 'name');
 
         return new self(
             Uuid::fromString($data['uuid']),
             new Credentials(
                 Email::fromString($data['credentials']['email']),
                 HashedPassword::fromHash($data['credentials']['password'])
-            )
+            ),
+            Name::fromString($data['name'])
         );
     }
 
@@ -35,14 +38,16 @@ final class UserWasCreated implements Serializable
             'credentials' => [
                 'email' => $this->credentials->email->toString(),
                 'password' => $this->credentials->password->toString()
-            ]
+            ],
+            'name' => $this->name->toString()
         ];
     }
 
-    public function __construct(UuidInterface $uuid, Credentials $credentials)
+    public function __construct(UuidInterface $uuid, Credentials $credentials, Name $name)
     {
         $this->uuid = $uuid;
         $this->credentials = $credentials;
+        $this->name = $name;
     }
 
     /**
@@ -54,4 +59,8 @@ final class UserWasCreated implements Serializable
      * @var Credentials
      */
     public $credentials;
+    /**
+     * @var Name
+     */
+    public $name;
 }

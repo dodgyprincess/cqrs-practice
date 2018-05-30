@@ -46,6 +46,4 @@ final class UserEmailChanged implements Serializable
      * @var Email
      */
     public $email;
-
-
 }

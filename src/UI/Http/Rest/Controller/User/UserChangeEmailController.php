@@ -21,7 +21,7 @@ final class UserChangeEmailController extends CommandController
      *     methods={"POST"}
      * )
      *
-     * @param string $uuid
+     * @param string  $uuid
      * @param Request $request
      *
      * @return JsonResponse

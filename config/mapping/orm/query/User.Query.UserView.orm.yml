@@ -7,3 +7,6 @@ App\Domain\User\Query\UserView:
   embedded:
     credentials:
       class: App\Domain\User\ValueObject\Auth\Credentials
+    name:
+      class: App\Domain\User\ValueObject\Name
+      columnPrefix: false

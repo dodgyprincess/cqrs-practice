@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\User\Query;
 
 use App\Domain\User\Event\UserEmailChanged;
+use App\Domain\User\Event\UserNameChanged;
 use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Query\UserView;
 use App\Domain\User\Query\Repository\UserReadModelRepositoryInterface;
@@ -24,6 +25,15 @@ class UserReadProjectionFactory extends Projector
         $userReadModel = $this->repository->oneByUuid($emailChanged->uuid);
 
         $userReadModel->credentials->email = $emailChanged->email->toString();
+
+        $this->repository->apply();
+    }
+
+    protected function applyUserNameChanged(UserNameChanged $userNameChanged): void
+    {
+        $userReadModel = $this->repository->oneByUuid($userNameChanged->uuid);
+
+        $userReadModel->name = $userNameChanged->name->toString();
 
         $this->repository->apply();
     }

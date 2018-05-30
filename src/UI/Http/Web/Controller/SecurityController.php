@@ -17,7 +17,7 @@ class SecurityController extends AbstractRenderController
      *     name="login",
      *     methods={"GET", "POST"}
      * )
-     * 
+     *
      * @param AuthenticationUtils $authUtils
      *
      * @return Response

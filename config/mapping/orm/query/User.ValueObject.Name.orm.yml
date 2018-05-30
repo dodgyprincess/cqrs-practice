@@ -1,0 +1,5 @@
+App\Domain\User\ValueObject\Name:
+    type: embeddable
+    fields:
+        name:
+            type: string
